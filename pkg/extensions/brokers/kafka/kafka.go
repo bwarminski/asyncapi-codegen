@@ -174,6 +174,7 @@ func (c *Controller) messagesHandler(ctx context.Context, r *kafka.Reader, sub e
 		sub.TransmitReceivedMessage(extensions.BrokerMessage{
 			Headers: headers,
 			Payload: msg.Value,
+			Channel: msg.Topic,
 		})
 	}
 }

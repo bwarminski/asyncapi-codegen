@@ -69,6 +69,7 @@ func (bcs BrokerChannelSubscription) Cancel(ctx context.Context) {
 type BrokerMessage struct {
 	Headers map[string][]byte
 	Payload []byte
+	Channel string
 }
 
 // IsUninitialized check if the BrokerMessage is at zero value, i.e. the

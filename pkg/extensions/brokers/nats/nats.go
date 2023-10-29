@@ -116,6 +116,7 @@ func messagesHandler(sub extensions.BrokerChannelSubscription) nats.MsgHandler {
 		sub.TransmitReceivedMessage(extensions.BrokerMessage{
 			Headers: headers,
 			Payload: msg.Data,
+			Channel: msg.Subject,
 		})
 	}
 }
