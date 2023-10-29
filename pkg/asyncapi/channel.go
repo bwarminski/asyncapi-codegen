@@ -14,6 +14,7 @@ type Channel struct {
 
 	Subscribe *Operation `json:"subscribe"`
 	Publish   *Operation `json:"publish"`
+	ExtName   *string    `json:"x-go-name,omitempty"`
 
 	// Non AsyncAPI fields
 	Name string `json:"-"`
@@ -23,7 +24,11 @@ type Channel struct {
 // Process processes the Channel to make it ready for code generation.
 func (c *Channel) Process(path string, spec Specification) {
 	// Set channel name and path
-	c.Name = utils.UpperFirstLetter(path)
+	name := path
+	if c.ExtName != nil {
+		name = *c.ExtName
+	}
+	c.Name = utils.UpperFirstLetter(name)
 	c.Path = path
 
 	// Get message
@@ -34,7 +39,7 @@ func (c *Channel) Process(path string, spec Specification) {
 	if msg.Reference != "" {
 		msgName = strings.Split(msg.Reference, "/")[3]
 	} else {
-		msgName = c.Name
+		msgName = name
 	}
 
 	// Process message
