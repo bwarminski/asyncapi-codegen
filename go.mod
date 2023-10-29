@@ -1,4 +1,4 @@
-module github.com/lerenn/asyncapi-codegen
+module github.com/bwarminski/asyncapi-codegen
 
 go 1.19
 
